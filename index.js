@@ -11,6 +11,8 @@ app.all("/", (req, res) => {
   res.send("Blog API");
 });
 
+app.use(require("./src/errorHandler"));
+
 app.listen(PORT, () => {
   console.log(`Running: http://localhost:${PORT}`);
 });
