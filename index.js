@@ -11,6 +11,9 @@ app.all("/", (req, res) => {
   res.send("Blog API");
 });
 
+// MongoDB connection
+require("./src/dbConnection");
+
 app.use(require("./src/errorHandler"));
 
 app.listen(PORT, () => {
