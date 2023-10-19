@@ -7,13 +7,18 @@ require("dotenv").config();
 const PORT = process.env.PORT || 8000;
 
 app.use(express.json());
-app.all("/", (req, res) => {
-  res.send("Blog API");
-});
 
 // MongoDB connection
 require("./src/dbConnection");
 
+app.all("/", (req, res) => {
+  res.send("Blog API");
+});
+
+/* --------------------------------- */
+app.use("/blog", require("./src/routes/blogRoute"));
+
+/* --------------------------------- */
 app.use(require("./src/errorHandler"));
 
 app.listen(PORT, () => {
