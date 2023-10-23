@@ -15,6 +15,11 @@ const blogCategorySchema = new mongoose.Schema(
 
 const blogPostSchema = new mongoose.Schema(
   {
+    blogCategoryId: {
+      type: mongoose.Schema.ObjectId,
+      ref: "BlogCategory",
+      required: true,
+    },
     title: {
       type: String,
       trim: true,
