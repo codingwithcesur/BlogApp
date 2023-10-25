@@ -51,9 +51,16 @@ module.exports.User = {
     if (email && password) {
       const user = await User.findOne({ email: email, password: password });
       if (user) {
+        req.session = {
+          user: { email: user.email, password: user.password },
+        };
+        if (req.body?.rememberMe) {
+          req.sessionOptions.maxAge = 1000 * 60 * 60 * 24 * 3; // 3 days
+        }
         res.status(200).send({
           error: false,
           result: user,
+          session: req.session,
         });
       } else {
         res.errorStatusCode = 401;

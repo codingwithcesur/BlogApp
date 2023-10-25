@@ -8,6 +8,16 @@ const PORT = process.env.PORT || 8000;
 
 app.use(express.json());
 
+/* --------------------------------- */
+const session = require("cookie-session");
+app.use(
+  session({
+    secret: process.env.SECRET_KEY || "secret_key_for_cookie",
+    maxAge: 1000 * 60 * 60 * 24, // 1 day
+  })
+);
+
+/* --------------------------------- */
 // MongoDB connection
 require("./src/dbConnection");
 
