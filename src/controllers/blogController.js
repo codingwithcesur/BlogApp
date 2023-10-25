@@ -13,6 +13,7 @@ module.exports.BlogCategory = {
       result: data,
     });
   },
+
   create: async (req, res) => {
     const data = await BlogCategory.create(req.body);
     res.status(201).send({
@@ -22,7 +23,9 @@ module.exports.BlogCategory = {
     });
   },
   read: async (req, res) => {
-    const data = await BlogCategory.findOne({ _id: req.params.categoryId });
+    const data = await BlogCategory.findOne({
+      _id: req.params.categoryId,
+    });
     res.status(200).send({
       error: false,
       result: data,
@@ -48,7 +51,17 @@ module.exports.BlogCategory = {
 
 module.exports.BlogPost = {
   list: async (req, res) => {
-    const data = await BlogPost.find();
+    const data = await BlogPost.find().populate("blogCategoryId");
+    res.status(200).send({
+      error: false,
+      count: data.length,
+      result: data,
+    });
+  },
+  listInCategory: async (req, res) => {
+    const data = await BlogPost.find({
+      blogCategoryId: req.params.categoryId,
+    }).populate("blogCategoryId");
     res.status(200).send({
       error: false,
       count: data.length,
