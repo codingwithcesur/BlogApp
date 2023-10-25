@@ -9,6 +9,10 @@ const userSchema = new mongoose.Schema(
       trim: true,
       unique: true,
       required: [true, "Email is required"],
+      validate: [
+        (email) => email.includes("@") > 0 && email.includes(".") > 0,
+        "Email is invalid",
+      ],
     },
     password: {
       type: String,
