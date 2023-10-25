@@ -8,7 +8,7 @@ const charsCount = 32; // 32 for 64 chars
 const encType = "sha512";
 
 module.exports = (password) => {
-  const encode = crypto.pbkdf2(
+  const encode = crypto.pbkdf2Sync(
     password,
     keyCode,
     loopCount,
