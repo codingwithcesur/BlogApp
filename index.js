@@ -18,6 +18,8 @@ app.all("/", (req, res) => {
 /* --------------------------------- */
 app.use("/blog", require("./src/routes/blogRoute"));
 
+// require("./src/sync")();
+
 /* --------------------------------- */
 app.use(require("./src/errorHandler"));
 
