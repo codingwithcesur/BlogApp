@@ -16,6 +16,7 @@ app.all("/", (req, res) => {
 });
 
 /* --------------------------------- */
+app.use("/user", require("./src/routes/userRoute"));
 app.use("/blog", require("./src/routes/blogRoute"));
 
 // require("./src/sync")();
