@@ -71,4 +71,11 @@ module.exports.User = {
       throw new Error("Invalid email or password");
     }
   },
+  logout: async (req, res) => {
+    req.session = null;
+    res.status(200).send({
+      error: false,
+      result: "logout success",
+    });
+  },
 };
