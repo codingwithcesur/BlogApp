@@ -21,6 +21,9 @@ app.use(
 // MongoDB connection
 require("./src/dbConnection");
 
+// Searching&Sorting&Pagination
+app.use(require("./src/middlewares/findSearchSortPage"));
+
 app.all("/", (req, res) => {
   res.send("Blog API");
 });
