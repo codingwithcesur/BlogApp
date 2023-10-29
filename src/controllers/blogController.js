@@ -55,8 +55,17 @@ module.exports.BlogPost = {
     const search = req.query?.search || {};
     for (let key in search)
       search[key] = { $regex: search[key], $options: "i" };
+    // Sorting
+    const sort = req.query?.sort || {};
+    console.log(sort);
 
-    const data = await BlogPost.find(search);
+    // Pagination
+    const limit = Number(req.query?.limit || process.env?.PAGE_SIZE || 20);
+    // console.log("limit", limit);
+    let page = Number(req.query?.limit || 1) - 1;
+    const skip = Number(req.query?.skip) || page * limit; // FrontEnd can send skip number
+
+    const data = await BlogPost.find(search).sort(sort).limit(limit).skip(skip);
     // ---------------------------------
 
     // const data = await BlogPost.find().populate("blogCategoryId");
