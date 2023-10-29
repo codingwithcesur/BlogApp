@@ -64,6 +64,7 @@ module.exports.BlogPost = {
     res.status(200).send({
       error: false,
       count: data.length,
+      details: await req.getModelListDetails(BlogPost),
       result: data,
     });
   },
