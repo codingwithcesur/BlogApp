@@ -18,7 +18,12 @@ module.exports = (req, res, next) => {
   let skip = Number(req.query?.skip); // FrontEnd can send skip number
   skip = skip > 0 ? skip : page * limit;
 
-  req.getModelList = async (Model) => {
-    return await Model.find(search).sort(sort).skip(skip).limit(limit);
+  req.getModelList = async (Model, populate = null) => {
+    return await Model.find(search)
+      .sort(sort)
+      .skip(skip)
+      .limit(limit)
+      .populate(populate);
   };
+  next();
 };

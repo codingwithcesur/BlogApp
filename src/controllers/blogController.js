@@ -57,6 +57,7 @@ module.exports.BlogPost = {
     //   .limit(limit)
     //   .populate("blogCategoryId");
     // --------------------------------- //
+    const data = await req.getModelList(BlogPost, "blogCategoryId");
 
     res.status(200).send({
       error: false,
